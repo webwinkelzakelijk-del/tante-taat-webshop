@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: ["three"],
   // Replit dev preview runs behind a proxy
-  allowedDevOrigins: ["*.replit.dev", "*.repl.co", "*.riker.replit.dev"],
+  allowedDevOrigins: ["*.replit.dev", "*.*.replit.dev", "*.repl.co", "*.replit.app"],
 };
 
 export default nextConfig;
