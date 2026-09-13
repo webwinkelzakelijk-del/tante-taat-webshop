@@ -37,7 +37,7 @@ export function Hero() {
         </div>
 
         <div className="hero-media relative min-h-[48svh] overflow-hidden rounded-[2rem] bg-[#d7c6ae] lg:min-h-[calc(100svh-6rem)]">
-          <HeroVideo src="/media/atelier-film.mp4" poster="/media/hero-poster.webp" />
+          <HeroVideo src="/media/atelier-film.mp4" webm="/media/atelier-film.webm" poster="/media/hero-poster.webp" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-white/5" />
           <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between rounded-2xl border border-white/25 bg-black/15 p-4 text-white backdrop-blur-sm sm:bottom-7 sm:left-7 sm:right-7 sm:p-5">
             <div>

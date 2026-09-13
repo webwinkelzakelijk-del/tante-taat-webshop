@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
  * alleen toe zonder geluid, dus muted is verplicht. Mocht de browser of het OS
  * de video toch pauzeren (tab-wissel, energiebesparing), dan starten we hem opnieuw.
  */
-export function HeroVideo({ src, poster }: { src: string; poster: string }) {
+export function HeroVideo({ src, webm, poster }: { src: string; webm?: string; poster: string }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -46,7 +46,6 @@ export function HeroVideo({ src, poster }: { src: string; poster: string }) {
     <video
       ref={ref}
       className="absolute inset-0 h-full w-full object-cover"
-      src={src}
       poster={poster}
       autoPlay
       muted
@@ -56,6 +55,10 @@ export function HeroVideo({ src, poster }: { src: string; poster: string }) {
       disablePictureInPicture
       controls={false}
       aria-label="Film uit het atelier van Tante Taat"
-    />
+    >
+      {/* WebM (VP9) is ~15% lighter; browsers that cannot play it fall through to MP4. */}
+      {webm && <source src={webm} type="video/webm" />}
+      <source src={src} type="video/mp4" />
+    </video>
   );
 }
