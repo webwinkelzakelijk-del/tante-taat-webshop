@@ -30,6 +30,10 @@ fi
 
 if [ ! -f .next/BUILD_ID ] || [ "$(cat "$STAMP" 2>/dev/null)" != "$CURRENT" ]; then
   echo "▸ Building production bundle (this takes a minute the first time)…"
+  # Never reuse a build cache that may have been written while an older server
+  # was still reading it. Replit's small container can otherwise leave Webpack's
+  # persistent cache in a half-written state after a restart.
+  rm -rf .next
   NODE_OPTIONS="--max-old-space-size=2048" npm run build
   echo "$CURRENT" > "$STAMP"
 else
