@@ -5,6 +5,15 @@
 # small container and its hot-reload websocket does not survive Replit's proxy.
 set -e
 
+# A Pull/restart can be launched while an older workflow still owns port 3000.
+# Stop that server before touching .next; otherwise visitors can receive HTML
+# from the old build while its JavaScript chunks are being replaced.
+if command -v fuser >/dev/null 2>&1; then
+  fuser -k 3000/tcp 2>/dev/null || true
+elif command -v pkill >/dev/null 2>&1; then
+  pkill -f '[n]ext-server' 2>/dev/null || true
+fi
+
 STAMP=".next/.built-commit"
 CURRENT="$(git rev-parse HEAD 2>/dev/null || echo nogit)"
 # Any uncommitted change also invalidates the build.
