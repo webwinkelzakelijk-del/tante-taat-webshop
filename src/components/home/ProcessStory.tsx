@@ -1,9 +1,14 @@
 "use client";
 
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+
+const GoldsmithScene = dynamic(() => import("../three/GoldsmithScene"), {
+  ssr: false,
+  loading: () => <p className="absolute inset-0 grid place-items-center text-sm text-cream/60" role="status">Het atelier krijgt vorm…</p>,
+});
 
 const steps = [
   {
@@ -87,22 +92,11 @@ function LayersScene() {
 function AtelierScene() {
   return (
     <div className="atelier-scene">
-      <div className="atelier-photo-card">
-        <Image
-          src="/media/nikita-at-work.webp"
-          alt="Nikita werkt aan een ring in haar goudsmederij"
-          fill
-          sizes="(min-width: 1024px) 55vw, 100vw"
-          className="object-cover"
-        />
-        <span className="atelier-photo-glow" />
-      </div>
+      <GoldsmithScene />
       <div className="atelier-signature">
         <span className="atelier-avatar">N</span>
         <span><b>Nikita</b><small>Goudsmid · Emmen</small></span>
       </div>
-      <div className="atelier-ring-token"><span /></div>
-      <span className="atelier-tool-line" />
     </div>
   );
 }
