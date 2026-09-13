@@ -17,6 +17,8 @@ async function shopifyFetch<T>(query: string, variables: Record<string, unknown>
     },
     body: JSON.stringify({ query, variables }),
     next: { revalidate },
+    // Never let a slow Shopify response hang a page render.
+    signal: AbortSignal.timeout(10_000),
   });
   const json = await res.json();
   if (json.errors) throw new Error(JSON.stringify(json.errors));

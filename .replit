@@ -1,4 +1,4 @@
-run = "npm run dev"
+run = "sh scripts/start.sh"
 entrypoint = "src/app/page.tsx"
 modules = ["nodejs-20", "web"]
 
@@ -15,14 +15,24 @@ localPort = 3000
 externalPort = 80
 
 [workflows]
-runButton = "Dev server"
+runButton = "Webshop"
 
 [[workflows.workflow]]
-name = "Dev server"
+name = "Webshop"
 mode = "sequential"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm install && npm run dev"
+args = "sh scripts/start.sh"
+waitForPort = 3000
+
+[[workflows.workflow]]
+name = "Dev server (hot reload)"
+mode = "sequential"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
 waitForPort = 3000

@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, useTransition } from "react";
+import { createContext, useCallback, useContext, useMemo, useState, useTransition } from "react";
 import type { Cart } from "@/lib/types";
-import { addToCart, getCart, updateCartLine } from "@/lib/cart-actions";
+import { addToCart, updateCartLine } from "@/lib/cart-actions";
 
 type Ctx = {
   cart: Cart | null;
@@ -20,16 +20,16 @@ export function CartProvider({ children, initialCart }: { children: React.ReactN
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
 
-  useEffect(() => {
-    if (!initialCart) getCart().then((c) => c && setCart(c));
-  }, [initialCart]);
-
   const add = useCallback(async (id: string, q = 1, attributes?: { key: string; value: string }[]) => {
     await new Promise<void>((resolve) =>
       startTransition(async () => {
-        const c = await addToCart(id, q, attributes);
-        setCart(c);
-        setOpen(true);
+        try {
+          const c = await addToCart(id, q, attributes);
+          setCart(c);
+          setOpen(true);
+        } catch (err) {
+          console.error("[cart] toevoegen mislukt", err);
+        }
         resolve();
       }),
     );
@@ -38,7 +38,11 @@ export function CartProvider({ children, initialCart }: { children: React.ReactN
   const update = useCallback(async (lineId: string, q: number) => {
     await new Promise<void>((resolve) =>
       startTransition(async () => {
-        setCart(await updateCartLine(lineId, q));
+        try {
+          setCart(await updateCartLine(lineId, q));
+        } catch (err) {
+          console.error("[cart] bijwerken mislukt", err);
+        }
         resolve();
       }),
     );
