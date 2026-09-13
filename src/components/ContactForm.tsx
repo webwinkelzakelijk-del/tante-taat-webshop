@@ -9,14 +9,18 @@ const subjects = ["Moedermelk / DNA sieraad", "Vingerafdruk", "Trouw- of verlovi
 export function ContactForm() {
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setBusy(true);
+    setError("");
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    await fetch("/api/contact", { method: "POST", body: JSON.stringify(data) }).catch(() => {});
+    const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) }).catch(() => null);
+    const result = await response?.json().catch(() => null);
     setBusy(false);
-    setSent(true);
+    if (response?.ok) setSent(true);
+    else setError(result?.message ?? "Versturen lukte niet. Mail ons gerust rechtstreeks.");
   }
 
   if (sent)
@@ -30,6 +34,7 @@ export function ContactForm() {
   const field = "w-full rounded-xl border border-stone/50 bg-white/70 px-4 py-3 text-sm outline-none focus:border-gold";
   return (
     <form onSubmit={submit} className="space-y-5 rounded-[2rem] bg-cream-deep p-8">
+      <label className="sr-only" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block text-xs text-ink-soft">Naam<input name="naam" required className={`${field} mt-1.5`} /></label>
         <label className="block text-xs text-ink-soft">E-mail<input name="email" type="email" required className={`${field} mt-1.5`} /></label>
@@ -45,6 +50,7 @@ export function ContactForm() {
       <button disabled={busy} className="shimmer w-full rounded-full bg-ink py-4 text-sm tracking-wide text-cream transition hover:bg-ink-soft disabled:opacity-50">
         {busy ? "Versturen…" : "Verstuur"}
       </button>
+      {error && <p role="alert" className="text-center text-sm text-red-700">{error} <a href="mailto:info@tantetaat.nl" className="underline">Mail rechtstreeks</a>.</p>}
     </form>
   );
 }

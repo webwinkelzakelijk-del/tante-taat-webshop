@@ -1,97 +1,54 @@
-"use client";
-
-import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ArrowDown } from "lucide-react";
-import { Button } from "@/components/ui";
-
-const JewelViewer = dynamic(() => import("@/components/three/JewelViewer").then((m) => m.JewelViewer), { ssr: false });
-
-const words = ["Een", "druppel", "van", "jouw", "verhaal,"];
+import Link from "next/link";
+import { ArrowDownRight, Play } from "lucide-react";
 
 export function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const yJewel = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
   return (
-    <section ref={ref} className="paper relative -mt-[73px] min-h-[100svh] overflow-hidden">
-      {/* soft blush wash */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_75%_40%,#f3dcd6_0%,transparent_70%),radial-gradient(40%_40%_at_15%_85%,#dff0fa_0%,transparent_70%)]" />
-
-      <div className="mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-8 px-6 pt-28 pb-16 lg:grid-cols-[1.05fr_1fr] lg:pt-16">
-        <motion.div style={{ y, opacity }} className="relative z-10">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="mb-6 text-[11px] tracking-[0.3em] text-gold-deep uppercase"
-          >
-            Goudsmederij · Emmen
-          </motion.p>
-
-          <h1 className="font-display text-[13vw] leading-[0.95] tracking-tight sm:text-7xl lg:text-[5.6rem]">
-            {words.map((w, i) => (
-              <motion.span
-                key={w}
-                className="mr-[0.25em] inline-block"
-                initial={{ opacity: 0, y: 40, rotate: 2 }}
-                animate={{ opacity: 1, y: 0, rotate: 0 }}
-                transition={{ duration: 0.9, delay: 0.35 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {w}
-              </motion.span>
-            ))}
-            <br />
-            <motion.em
-              className="gold-text not-italic"
-              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            >
-              voor altijd in goud.
-            </motion.em>
+    <section className="hero-shell relative isolate overflow-hidden bg-ink text-cream">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_15%,rgba(234,130,157,.2),transparent_34%),radial-gradient(circle_at_78%_20%,rgba(35,151,203,.18),transparent_30%)]" />
+      <div className="mx-auto grid min-h-[calc(100svh-2rem)] max-w-[1500px] items-center gap-10 px-5 pb-10 pt-12 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:px-10 lg:py-12">
+        <div className="relative z-10 py-8 lg:py-16">
+          <p className="mb-7 flex items-center gap-3 text-[10px] font-semibold tracking-[.28em] text-cream/65 uppercase">
+            <span className="h-px w-8 bg-gold" /> Goudsmederij · Emmen
+          </p>
+          <h1 className="font-display max-w-[10ch] text-[clamp(4.2rem,8.2vw,8.7rem)] leading-[.78] tracking-[-.055em]">
+            Draag wat je
+            <span className="block pt-[.18em] font-hand text-[.72em] font-normal leading-none tracking-normal text-blush-deep">
+              nooit kwijt wilt.
+            </span>
           </h1>
+          <p className="mt-9 max-w-xl text-base leading-7 text-cream/72 sm:text-lg">
+            Handgesmede sieraden waarin een moedermelksteen, vingerafdruk,
+            geboortesteen of dierbare herinnering een plek krijgt.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="#vind-jouw-sieraad" className="group inline-flex items-center gap-3 rounded-full bg-cream px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-blush">
+              Vind jouw sieraad <ArrowDownRight size={17} className="transition group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+            </Link>
+            <Link href="/atelier" className="inline-flex items-center gap-3 rounded-full border border-cream/25 px-6 py-3.5 text-sm transition hover:border-cream/60 hover:bg-cream/5">
+              <Play size={15} fill="currentColor" /> Kijk mee in het atelier
+            </Link>
+          </div>
+          <div className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-cream/15 pt-6 text-[10px] leading-4 tracking-[.12em] text-cream/55 uppercase sm:text-xs">
+            <span>Handgesmeed<br />in Emmen</span>
+            <span>Duurzaam<br />goud & zilver</span>
+            <span>Veilig &<br />verzekerd verzonden</span>
+          </div>
+        </div>
 
-          <motion.p
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }}
-            className="mt-8 max-w-md text-base leading-relaxed text-ink-soft"
-          >
-            Moedermelk, een vingerafdruk, een plukje vacht of een geboortesteen – met de hand gesmeed
-            in 100% duurzaam goud en zilver. Geen twee sieraden zijn hetzelfde. Net als jij.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.25 }}
-            className="mt-10 flex flex-wrap items-center gap-4"
-          >
-            <Button href="/collecties/moedermelk-dna-sieraden">Ontdek moedermelk sieraden</Button>
-            <Button href="/atelier" variant="outline">Zo maken we het</Button>
-          </motion.div>
-
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }} className="font-hand mt-10 text-2xl text-ink-soft">
-            “Draai me maar even rond →”
-          </motion.p>
-        </motion.div>
-
-        <motion.div style={{ y: yJewel }} className="relative h-[52vh] lg:h-[78vh]">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, delay: 0.5 }}
-            className="absolute inset-0"
-          >
-            <JewelViewer shape="ring" metal="goud" stone="#fbf6ee" className="h-full w-full" />
-          </motion.div>
-          <div className="pointer-events-none absolute inset-x-[15%] bottom-[8%] h-24 rounded-[100%] bg-blush/60 blur-3xl" />
-        </motion.div>
+        <div className="hero-media relative min-h-[48svh] overflow-hidden rounded-[2rem] bg-[#d7c6ae] lg:min-h-[calc(100svh-6rem)]">
+          <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" poster="/media/hero-poster.webp" aria-label="Handgemaakte sieraden op de werkbank van Tante Taat">
+            <source src="/media/atelier-film.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-white/5" />
+          <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between rounded-2xl border border-white/25 bg-black/15 p-4 text-white backdrop-blur-sm sm:bottom-7 sm:left-7 sm:right-7 sm:p-5">
+            <div>
+              <p className="text-[10px] tracking-[.22em] uppercase opacity-70">Van herinnering naar erfstuk</p>
+              <p className="font-display mt-1 text-2xl">Eén voor één gemaakt</p>
+            </div>
+            <span className="font-hand text-xl">in eigen atelier ♡</span>
+          </div>
+        </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}
-        className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-[10px] tracking-[0.3em] text-ink-soft uppercase"
-      >
-        Scroll
-        <motion.span animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}><ArrowDown size={14} /></motion.span>
-      </motion.div>
     </section>
   );
 }

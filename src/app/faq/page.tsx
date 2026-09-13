@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Eyebrow, Heading, Reveal } from "@/components/ui";
 import { Faq } from "@/components/Faq";
 import { faqs } from "@/lib/content";
@@ -16,7 +17,7 @@ export default function FaqPage() {
       <Faq items={faqs} />
       <Reveal className="mt-14 rounded-3xl bg-cream-deep p-8 text-center">
         <p className="font-display text-2xl">Staat je vraag er niet bij?</p>
-        <a href="/contact" className="mt-3 inline-block text-sm underline underline-offset-4">Stel hem gerust</a>
+        <Link href="/contact" className="mt-3 inline-block text-sm underline underline-offset-4">Stel hem gerust</Link>
       </Reveal>
     </div>
   );

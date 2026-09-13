@@ -4,7 +4,7 @@ import { demoCollectionProducts, demoCollections, demoProducts } from "./demo-da
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN;
 const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-const apiVersion = process.env.SHOPIFY_API_VERSION ?? "2025-07";
+const apiVersion = process.env.SHOPIFY_API_VERSION ?? "2026-07";
 
 export const isShopifyConfigured = Boolean(domain && token);
 

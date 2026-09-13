@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -113,7 +114,7 @@ export function ProductView({ product }: { product: Product }) {
               <div key={o.name}>
                 <div className="mb-3 flex items-center justify-between">
                   <p className="text-[11px] tracking-[0.2em] text-ink-soft uppercase">{o.name}</p>
-                  {/maat/i.test(o.name) && <a href="/ringmaat" className="text-xs underline underline-offset-4">Welke maat heb ik?</a>}
+                  {/maat/i.test(o.name) && <Link href="/ringmaat" className="text-xs underline underline-offset-4">Welke maat heb ik?</Link>}
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {o.values.map((v) => {
@@ -172,7 +173,7 @@ export function ProductView({ product }: { product: Product }) {
             {[
               { id: "details", t: "Over dit sieraad", c: <div className="prose prose-sm max-w-none text-ink-soft" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} /> },
               { id: "levertijd", t: "Levertijd & verzending", c: <p className="text-sm text-ink-soft">Persoonlijke sieraden: 4–6 weken na ontvangst van je materiaal. Overige sieraden: 1–2 weken. We verzenden verzekerd via PostNL. In schoolvakanties (Noord-Nederland) is het atelier gesloten.</p> },
-              { id: "onderhoud", t: "Onderhoud", c: <p className="text-sm text-ink-soft">Doe je sieraad af bij douchen, zwemmen en sporten. Vermijd parfum en crèmes op de steen. Poets zilver met een zacht doekje. <a href="/onderhoud" className="underline">Lees meer</a>.</p> },
+              { id: "onderhoud", t: "Onderhoud", c: <p className="text-sm text-ink-soft">Doe je sieraad af bij douchen, zwemmen en sporten. Vermijd parfum en crèmes op de steen. Poets zilver met een zacht doekje. <Link href="/onderhoud" className="underline">Lees meer</Link>.</p> },
             ].map((s) => (
               <div key={s.id}>
                 <button onClick={() => setOpenInfo(openInfo === s.id ? null : s.id)} className="flex w-full items-center justify-between py-4 text-left font-display text-lg">

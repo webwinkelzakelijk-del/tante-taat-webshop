@@ -24,9 +24,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="nl" className={`${cormorant.variable} ${manrope.variable} ${caveat.variable}`}>
       <body className="min-h-screen">
+        <a href="#main-content" className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-ink px-5 py-3 text-sm text-cream transition focus:translate-y-0">Ga naar de inhoud</a>
         <CartProvider initialCart={cart}>
           <Header />
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
           <CartDrawer />
         </CartProvider>

@@ -23,7 +23,6 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
   const pathname = usePathname();
-  const transparent = pathname === "/" && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -46,12 +45,7 @@ export function Header() {
         </div>
       </div>
 
-      <header
-        className={clsx(
-          "sticky top-0 z-50 transition-all duration-500",
-          transparent ? "bg-transparent" : "bg-cream/85 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,175,166,.3)]",
-        )}
-      >
+      <header className={clsx("sticky top-0 z-50 bg-cream/90 backdrop-blur-md transition-all duration-300", scrolled && "shadow-[0_1px_0_0_rgba(184,175,166,.35)]")}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
           <button className="rounded-full p-2 lg:hidden" onClick={() => setMenu(true)} aria-label="Menu">
             <Menu size={22} strokeWidth={1.5} />

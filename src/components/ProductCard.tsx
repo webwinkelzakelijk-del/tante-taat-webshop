@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import type { Product } from "@/lib/types";
 import { formatMoney } from "@/lib/format";
 
@@ -11,11 +8,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   const from = formatMoney(product.priceRange.minVariantPrice);
   return (
     <Link href={`/producten/${product.handle}`} className="group block">
-      <motion.div
-        whileHover={{ y: -6 }}
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="relative aspect-square overflow-hidden rounded-3xl bg-cream-deep"
-      >
+      <div className="relative aspect-square overflow-hidden rounded-3xl bg-cream-deep transition duration-500 group-hover:-translate-y-1.5">
         {a && (
           <Image
             src={a.url} alt={a.altText ?? product.title} fill priority={priority}
@@ -38,13 +31,13 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         <span className="absolute bottom-4 right-4 translate-y-3 rounded-full bg-ink px-4 py-2 text-xs text-cream opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           Bekijk
         </span>
-      </motion.div>
-      <div className="mt-4 flex items-start justify-between gap-3 px-1">
+      </div>
+      <div className="mt-4 flex flex-col items-start gap-2 px-1 sm:flex-row sm:justify-between sm:gap-3">
         <div>
           <p className="text-[10px] tracking-[0.2em] text-ink-soft uppercase">{product.productType}</p>
           <h3 className="font-display mt-1 text-xl leading-tight">{product.title}</h3>
         </div>
-        <p className="shrink-0 pt-4 text-sm text-ink-soft">{from.startsWith("Prijs") ? from : `vanaf ${from}`}</p>
+        <p className="text-sm text-ink-soft sm:shrink-0 sm:pt-4">{from.startsWith("Prijs") ? from : `vanaf ${from}`}</p>
       </div>
     </Link>
   );

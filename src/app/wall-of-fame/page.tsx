@@ -1,41 +1,35 @@
 import type { Metadata } from "next";
-import { Eyebrow, Heading, Item, Reveal, Stagger } from "@/components/ui";
-import { Testimonials } from "@/components/home/Sections";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
-export const metadata: Metadata = { title: "Wall of fame" };
+export const metadata: Metadata = { title: "Wall of fame", description: "Een kijkje van dichtbij bij de persoonlijke sieraden van Tante Taat." };
 
-/* Geboortekaartjes & momenten – vervang door echte inzendingen (bijv. via Shopify metaobjects of Instagram-feed). */
-const moments = [
-  { name: "Noor", date: "12 maart 2024", note: "3.240 gram puur geluk", color: "bg-blush" },
-  { name: "Jip & Fien", date: "2 juli 2023", note: "tweeling, dubbel feest", color: "bg-taat-soft" },
-  { name: "Mees", date: "28 november 2023", note: "geboortering: topaas", color: "bg-gold/20" },
-  { name: "Liv", date: "5 januari 2025", note: "moedermelk hanger, hart", color: "bg-cream-deep" },
-  { name: "Sem", date: "19 mei 2024", note: "vingerafdruk van papa", color: "bg-blush" },
-  { name: "Bobbie 🐾", date: "2012 – 2024", note: "voor altijd bij ons", color: "bg-taat-soft" },
+const gallery = [
+  { src: "/media/jewel-01.webp", alt: "Gouden ringen met persoonlijke stenen", tall: true },
+  { src: "/media/ring-birthstone.webp", alt: "Geboorteringen met gekleurde edelstenen" },
+  { src: "/media/detail-01.webp", alt: "Detail van een handgemaakt sieraad" },
+  { src: "/media/jewel-02.webp", alt: "Ring met lichte steen aan een hand" },
+  { src: "/media/jewel-03.webp", alt: "Gouden stapelringen", wide: true },
+  { src: "/media/detail-03.webp", alt: "Persoonlijke hanger in goud" },
+  { src: "/media/ring-moonstone.webp", alt: "Ring met maansteen", tall: true },
+  { src: "/media/jewel-04.webp", alt: "Handgemaakte ring tussen bloemen" },
+  { src: "/media/jewel-05.webp", alt: "Persoonlijk sieraad in een roze doosje" },
 ];
 
 export default function WallOfFamePage() {
   return (
-    <>
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <Reveal className="max-w-2xl">
-          <Eyebrow>Wall of fame</Eyebrow>
-          <Heading level={1} className="mt-3">De verhalen die we mochten bewaren.</Heading>
-          <p className="mt-5 text-ink-soft">Geboortekaartjes, foto’s en berichtjes die we ontvangen. Wil jij er ook bij? Stuur je kaartje naar het atelier.</p>
-        </Reveal>
-        <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {moments.map((m, i) => (
-            <Item key={m.name}>
-              <div className={`${m.color} rounded-3xl p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md`} style={{ transform: `rotate(${(i % 3) - 1}deg)` }}>
-                <p className="font-hand text-4xl">{m.name}</p>
-                <p className="mt-2 text-xs tracking-[0.2em] text-ink-soft uppercase">{m.date}</p>
-                <p className="font-display mt-4 text-xl italic">{m.note}</p>
-              </div>
-            </Item>
-          ))}
-        </Stagger>
+    <div className="px-5 py-16 sm:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid items-end gap-8 lg:grid-cols-2">
+          <div><p className="eyebrow">Wall of fame</p><h1 className="font-display mt-3 text-6xl leading-[.88] sm:text-7xl">Echte sieraden.<br />Echte details.</h1></div>
+          <p className="max-w-lg leading-7 text-ink-soft lg:justify-self-end">Een groeiend archief van werk uit het atelier. Na de Shopify-koppeling kunnen echte klantverhalen hier alleen met toestemming worden toegevoegd.</p>
+        </div>
+        <div className="mt-14 grid auto-rows-[220px] grid-cols-2 gap-3 sm:auto-rows-[310px] lg:grid-cols-4">
+          {gallery.map((image) => <div key={image.src} className={`relative overflow-hidden rounded-2xl bg-cream-deep ${image.tall ? "row-span-2" : ""} ${image.wide ? "col-span-2" : ""}`}><Image src={image.src} alt={image.alt} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover transition duration-700 hover:scale-[1.035]" /></div>)}
+        </div>
+        <div className="mt-14 text-center"><Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-cream">Bespreek jouw sieraad <ArrowUpRight size={16} /></Link></div>
       </div>
-      <Testimonials />
-    </>
+    </div>
   );
 }

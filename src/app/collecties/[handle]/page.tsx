@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { getCollection } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { Eyebrow, Heading, Item, Reveal, Stagger } from "@/components/ui";
-import { PersonalCta } from "@/components/home/Sections";
+import { PersonalCta } from "@/components/PersonalCta";
 
 type Props = { params: Promise<{ handle: string }> };
 

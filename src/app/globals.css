@@ -29,6 +29,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.eyebrow {
+  color: var(--color-gold-deep);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+a, button { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-taat);
+  outline-offset: 3px;
+}
+
 ::selection { background: var(--color-blush); color: var(--color-ink); }
 
 .font-display { font-family: var(--font-display); }
@@ -66,3 +80,15 @@ body {
 
 @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
 .animate-marquee { animation: marquee 40s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-media { background: url('/media/hero-poster.webp') center / cover; }
+  .hero-media video { display: none; }
+}
