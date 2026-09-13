@@ -36,3 +36,13 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 3000
+
+[[workflows.workflow]]
+name = "Pull latest & restart"
+mode = "sequential"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "git fetch origin && git reset --hard origin/main && sh scripts/start.sh"
+waitForPort = 3000
