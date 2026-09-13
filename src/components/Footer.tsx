@@ -29,7 +29,6 @@ const cols = [
     links: [
       ["Het atelier", "/atelier"],
       ["Zo maken we het", "/atelier#proces"],
-      ["Wall of fame", "/wall-of-fame"],
       ["Algemene voorwaarden", "/voorwaarden"],
       ["Privacy", "/privacy"],
     ],

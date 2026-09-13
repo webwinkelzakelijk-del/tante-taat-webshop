@@ -1,20 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Gem, Hand, PackageCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { Collection, Product } from "@/lib/types";
 import { ProductCard } from "@/components/ProductCard";
 import { Newsletter } from "@/components/Newsletter";
 import { Hero } from "./Hero";
 import { StoryFinder } from "./StoryFinder";
 import { JewelryLab } from "./JewelryLab";
+import { ProcessStory } from "./ProcessStory";
 
 const collectionMedia = ["/media/jewel-01.webp", "/media/jewel-03.webp", "/media/ring-birthstone.webp", "/media/jewel-04.webp"];
-const process = [
-  { icon: PackageCheck, no: "01", title: "Jouw verhaal komt binnen", text: "Na je bestelling ontvang je precies wat nodig is om moedermelk, een afdruk of ander materiaal veilig op te sturen." },
-  { icon: Gem, no: "02", title: "De herinnering krijgt vorm", text: "In het atelier wordt jouw materiaal zorgvuldig verwerkt en ontstaat de steen of afdruk die in het sieraad komt." },
-  { icon: Hand, no: "03", title: "Met de hand afgemaakt", text: "Het sieraad wordt gesmeed, gezet en afgewerkt. Pas wanneer alles klopt, wordt het verzekerd naar je verzonden." },
-];
-
 export function Homepage({ collections, products }: { collections: Collection[]; products: Product[] }) {
   return (
     <>
@@ -54,26 +49,7 @@ export function Homepage({ collections, products }: { collections: Collection[];
         </div>
       </section>
 
-      <section className="bg-ink px-5 py-20 text-cream sm:px-8 lg:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
-            <div>
-              <p className="eyebrow !text-gold">Het proces</p>
-              <h2 className="font-display mt-3 text-5xl leading-[.95] sm:text-6xl">Aandacht kun je zien. En voelen.</h2>
-              <p className="mt-6 max-w-md leading-7 text-cream/60">Persoonlijk werk kost tijd. Daarom laten we duidelijk zien wat er gebeurt nadat jij bestelt.</p>
-              <Link href="/atelier" className="mt-8 inline-flex items-center gap-2 border-b border-cream/40 pb-1 text-sm">Ontdek het atelier <ArrowUpRight size={16} /></Link>
-            </div>
-            <div className="divide-y divide-cream/12 border-y border-cream/12">
-              {process.map((step) => (
-                <article key={step.no} className="grid gap-4 py-7 sm:grid-cols-[4rem_1fr] sm:py-9">
-                  <span className="font-display text-3xl text-gold">{step.no}</span>
-                  <div><step.icon size={23} strokeWidth={1.3} className="mb-3 text-cream/55" /><h3 className="font-display text-2xl sm:text-3xl">{step.title}</h3><p className="mt-2 max-w-xl text-sm leading-6 text-cream/58">{step.text}</p></div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProcessStory />
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
@@ -100,17 +76,6 @@ export function Homepage({ collections, products }: { collections: Collection[];
             <h2 className="font-display mt-3 text-5xl leading-[.95] sm:text-6xl">Niet gemaakt voor iedereen. Wel helemaal voor jou.</h2>
             <p className="mt-6 max-w-lg leading-7 text-ink-soft">In de goudsmederij in Emmen ontstaan sieraden rondom echte herinneringen. Geen anonieme voorraad, maar een persoonlijk proces met ruimte om te vragen, voelen en kiezen.</p>
             <Link href="/atelier" className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-cream">Maak kennis met het atelier <ArrowUpRight size={16} /></Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 sm:px-8 lg:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-9 flex items-end justify-between gap-5"><div><p className="eyebrow">Echt werk</p><h2 className="font-display mt-2 text-5xl sm:text-6xl">Van dichtbij.</h2></div><Link href="/wall-of-fame" className="hidden items-center gap-2 text-sm font-semibold sm:flex">Meer bekijken <ArrowUpRight size={16} /></Link></div>
-          <div className="grid auto-rows-[190px] grid-cols-2 gap-3 sm:auto-rows-[250px] lg:grid-cols-4">
-            {["/media/detail-01.webp", "/media/detail-02.webp", "/media/detail-03.webp", "/media/detail-04.webp", "/media/ring-birthstone.webp"].map((src, index) => (
-              <div key={src} className={`relative overflow-hidden rounded-2xl ${index === 0 ? "row-span-2" : ""} ${index === 4 ? "col-span-2" : ""}`}><Image src={src} alt="Detail van een handgemaakt Tante Taat sieraad" fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover transition duration-700 hover:scale-[1.035]" /></div>
-            ))}
           </div>
         </div>
       </section>

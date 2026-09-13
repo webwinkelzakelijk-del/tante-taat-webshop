@@ -25,7 +25,7 @@ export default function AtelierPage() {
             <p className="mt-7 max-w-lg leading-7 text-ink-soft">Persoonlijke sieraden ontstaan niet aan een lopende band. Ze vragen om aandacht, vakmanschap en tijd aan de werkbank.</p>
           </div>
           <div className="relative aspect-[16/11] overflow-hidden rounded-[2rem] bg-cream-deep">
-            <video className="absolute inset-0 h-full w-full object-cover" controls playsInline preload="metadata" poster="/media/hero-poster.webp"><source src="/media/atelier-film.mp4" type="video/mp4" /></video>
+            <video className="absolute inset-0 h-full w-full object-cover" controls playsInline preload="none" poster="/media/hero-poster.webp"><source src="/media/atelier-film.mp4" type="video/mp4" /></video>
           </div>
         </div>
       </section>
