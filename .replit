@@ -6,7 +6,7 @@ modules = ["nodejs-20", "web"]
 channel = "stable-25_05"
 
 [deployment]
-build = ["sh", "-c", "npm install && npm run build"]
+build = ["sh", "-c", "npm ci --no-audit --no-fund && npm run build"]
 run = ["sh", "-c", "npm run start"]
 deploymentTarget = "cloudrun"
 
@@ -25,16 +25,6 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "sh scripts/start.sh"
-waitForPort = 3000
-
-[[workflows.workflow]]
-name = "Dev server (hot reload)"
-mode = "sequential"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
 waitForPort = 3000
 
 [[workflows.workflow]]

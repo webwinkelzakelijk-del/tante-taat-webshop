@@ -19,12 +19,12 @@ Zonder Shopify-token draait de site op **demo-data** (`src/lib/demo-data.ts`) in
 ## Starten
 
 ```bash
-npm install
+npm ci
 cp .env.example .env.local   # vul Shopify-gegevens in (optioneel)
 npm run dev
 ```
 
-Op **Replit**: importeer de repo, de `.replit` staat al goed (`npm run dev` op poort 3000). Zet de env-variabelen in *Secrets*.
+Op **Replit** draait de site bewust als geoptimaliseerde productiebuild via `scripts/start.sh`; gebruik daar niet `next dev`. Na een push naar `main` start je de workflow **Pull latest & restart**. Die haalt de laatste commit op, bouwt alleen als de code is veranderd en start `next start` op poort 3000. Zet de env-variabelen in *Secrets*.
 
 ## Shopify koppelen
 
@@ -36,7 +36,7 @@ Op **Replit**: importeer de repo, de `.replit` staat al goed (`npm run dev` op p
 ```
 SHOPIFY_STORE_DOMAIN=tantetaat.myshopify.com
 SHOPIFY_STOREFRONT_ACCESS_TOKEN=shpat_xxx
-SHOPIFY_API_VERSION=2025-07
+SHOPIFY_API_VERSION=2026-07
 ```
 
 "Afrekenen" leidt dan naar de Shopify-checkout (iDEAL, creditcard, Klarna, Apple/Google Pay). Orders, e-mails, verzending en btw regelt Shopify.
@@ -71,4 +71,3 @@ src/lib/                 shopify client, cart server actions, types, demo-data, 
 - Nieuwsbrief (`/api/newsletter`) koppelen aan Shopify Email of Klaviyo.
 - Contactformulier (`/api/contact`) koppelen aan Resend/Postmark.
 - Blog ("Mom life", onderhoud, tips) via Shopify Blogs of MDX.
-- Wall of fame vullen via Shopify metaobjects of Instagram-feed.

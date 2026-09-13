@@ -16,8 +16,7 @@ if [ ! -d node_modules ] || [ package-lock.json -nt node_modules/.package-lock.j
   echo "▸ Installing dependencies…"
   # npm ci installs exactly what the lockfile says and never rewrites it,
   # so Replit's local npm version cannot create "uncommitted changes" that block Pull.
-  npm ci --no-audit --no-fund || npm install --no-audit --no-fund
-  git checkout -- package-lock.json 2>/dev/null || true
+  npm ci --no-audit --no-fund
 fi
 
 if [ ! -f .next/BUILD_ID ] || [ "$(cat "$STAMP" 2>/dev/null)" != "$CURRENT" ]; then
