@@ -22,18 +22,23 @@ export function HeroVideo({ src, poster }: { src: string; poster: string }) {
     };
 
     play();
-    video.addEventListener("pause", play);
-    video.addEventListener("ended", play);
+    // Retry whenever the browser signals new data, and poll as a last resort:
+    // a cached video can be "ready" before hydration, which sometimes loses the autoplay.
+    const events = ["loadeddata", "canplay", "canplaythrough", "pause", "ended", "stalled"] as const;
+    events.forEach((e) => video.addEventListener(e, play));
     document.addEventListener("visibilitychange", play);
     window.addEventListener("pointerdown", play, { once: true });
     window.addEventListener("touchstart", play, { once: true });
+    const timer = window.setInterval(() => {
+      if (video.paused && document.visibilityState === "visible") play();
+    }, 1500);
 
     return () => {
-      video.removeEventListener("pause", play);
-      video.removeEventListener("ended", play);
+      events.forEach((e) => video.removeEventListener(e, play));
       document.removeEventListener("visibilitychange", play);
       window.removeEventListener("pointerdown", play);
       window.removeEventListener("touchstart", play);
+      window.clearInterval(timer);
     };
   }, []);
 
