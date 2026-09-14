@@ -15,7 +15,7 @@ export function Homepage({ collections, products }: { collections: Collection[];
     <>
       <Hero />
 
-      <section id="vind-jouw-sieraad" className="scroll-mt-24 px-5 py-20 sm:px-8 lg:py-28">
+      <section id="vind-jouw-sieraad" className="scroll-mt-24 px-5 py-16 sm:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-14">
             <p className="eyebrow">Begin bij het verhaal</p>
@@ -65,7 +65,7 @@ export function Homepage({ collections, products }: { collections: Collection[];
 
       <section className="px-5 pb-20 sm:px-8 lg:pb-28"><div className="mx-auto max-w-7xl"><JewelryLab /></div></section>
 
-      <section className="overflow-hidden bg-blush/35 px-5 py-20 sm:px-8 lg:py-28">
+      <section className="overflow-hidden bg-brand-pink/20 px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_.9fr]">
           <div className="grid grid-cols-2 gap-3">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.7rem]"><Image src="/media/jewel-05.webp" alt="Gouden ring met persoonlijke steen" fill sizes="(min-width:1024px) 30vw, 50vw" className="object-cover" /></div>
