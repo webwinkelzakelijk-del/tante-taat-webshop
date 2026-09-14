@@ -44,7 +44,9 @@ export function Hero() {
               <p className="text-[10px] tracking-[.22em] uppercase opacity-70">Van herinnering naar erfstuk</p>
               <p className="font-display mt-1 text-2xl">Eén voor één gemaakt</p>
             </div>
-            <span className="hidden rounded-full bg-brand-pink px-4 py-2 text-[10px] font-semibold tracking-[.12em] text-ink uppercase sm:block">Eigen atelier ♡</span>
+            <span className="hidden items-center rounded-full bg-brand-pink px-4 py-2 text-[10px] font-semibold tracking-[.12em] text-ink uppercase sm:flex">
+              Eigen atelier <span className="ml-1.5 text-[18px] leading-none" aria-hidden="true">♡</span>
+            </span>
           </div>
         </div>
       </div>

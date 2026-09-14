@@ -80,7 +80,7 @@ export function Homepage({ collections, products }: { collections: Collection[];
         </div>
       </section>
 
-      <section className="px-5 pb-20 sm:px-8 lg:pb-28">
+      <section className="px-5 py-12 sm:px-8 sm:py-14 lg:py-16">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-stone/30 bg-cream-deep px-6 py-12 text-center sm:px-12">
           <p className="font-hand text-3xl text-taat">Een kijkje achter de werkbank?</p>
           <h2 className="font-display mt-2 text-4xl sm:text-5xl">Ateliernieuws, nieuwe stenen en verhalen.</h2>

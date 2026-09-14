@@ -67,7 +67,6 @@ export function StoryFinder() {
           </div>
           <div key={story.id} className="story-stage relative order-1 flex min-h-48 items-center justify-center sm:order-2 sm:min-h-80">
             <span className="story-shadow" aria-hidden="true" /><StoryObject scene={story.scene} />
-            <p className="absolute right-0 bottom-0 text-[9px] tracking-[.2em] text-cream/35 uppercase">Beweeg over het object</p>
           </div>
         </div>
       </div>
